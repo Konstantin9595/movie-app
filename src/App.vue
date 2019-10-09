@@ -5,7 +5,7 @@
       app
       clipped
     >
-    <ListMenu :listMenu="menu" />
+    <ListMenu :listMenu="getMenu" />
     </v-navigation-drawer>
 
     <v-app-bar
@@ -55,15 +55,13 @@ export default Vue.extend({
   },
   data: () => ({
     drawer: true,
-    menu: [
-      { id: 1, label: "Фильмы",  href: "/films" },
-      { id: 2, label: "Сериалы", href: "/series" },
-      { id: 3, label: "Мультфильмы", href: "/multfilms" }
-    ],
   }),
   computed: {
     getFilms: function() {
       return this.$store.getters.getFilms;
+    },
+    getMenu: function() {
+      return this.$store.getters.getMenu;
     }
   }
 
