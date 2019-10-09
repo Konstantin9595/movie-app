@@ -26,7 +26,7 @@
       >
       <template>
         <v-container fluid>
-          <ListFilms :films="films"/>
+          <ListFilms :films="getFilms"/>
         </v-container>
       </template>
       </v-container>
@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts">
+
 import Counter from './components/Counter.vue';
 import ListFilms from './components/ListFilms.vue';
 import ListMenu from './components/ListMenu.vue';
@@ -59,12 +60,12 @@ export default Vue.extend({
       { id: 2, label: "Сериалы", href: "/series" },
       { id: 3, label: "Мультфильмы", href: "/multfilms" }
     ],
-    films: [
-      {id: 1, title: "Великий уравнитель", desc: "Описание фильма великий уравнитель", src: "https://picsum.photos/200/300"},
-      {id: 2, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", src: "https://picsum.photos/id/237/200/300"},
-      {id: 3, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", src: "https://picsum.photos/id/237/200/300"},
-    ],
   }),
+  computed: {
+    getFilms: function() {
+      return this.$store.getters.getFilms;
+    }
+  }
 
 });
 </script>
