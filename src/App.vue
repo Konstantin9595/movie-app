@@ -5,16 +5,7 @@
       app
       clipped
     >
-      <v-list dense>
-        <v-list-item v-for="link in links" :key="link.id">
-          <v-list-item-action>
-            <v-icon> {{ mdiMovieOpen }} </v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-btn text small :href="link.href">{{ link.label }}</v-btn>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+    <ListMenu :listMenu="menu" />
     </v-navigation-drawer>
 
     <v-app-bar
@@ -50,20 +41,20 @@
 <script lang="ts">
 import Counter from './components/Counter.vue';
 import ListFilms from './components/ListFilms.vue';
+import ListMenu from './components/ListMenu.vue';
 import 'vue-material-design-icons/styles.css';
-import { mdiMovieOpen } from '@mdi/js';
 import { Component, Vue } from 'vue-property-decorator';
 
 export default Vue.extend({
   name: 'App',
   components: {
     Counter,
-    ListFilms
+    ListFilms,
+    ListMenu,
   },
   data: () => ({
     drawer: true,
-    mdiMovieOpen,
-    links: [
+    menu: [
       { id: 1, label: "Фильмы",  href: "/films" },
       { id: 2, label: "Сериалы", href: "/series" },
       { id: 3, label: "Мультфильмы", href: "/multfilms" }
