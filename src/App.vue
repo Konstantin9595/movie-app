@@ -35,28 +35,7 @@
       >
       <template>
         <v-container fluid>
-          <v-row class="height">
-            <v-col
-              v-for="film in films"
-              :key="film.id"
-              xs="12"
-              sm="6"
-              md="4"
-            >
-              <v-card
-                class="pa-2"
-                outlined
-                tile
-              >
-            <v-img height="200px" :src="film.src" /> 
-            <v-card-title>{{ film.title }}</v-card-title>
-            <v-card-text class="crop">{{ film.desc }}</v-card-text>
-            <v-card-actions>
-              <v-btn text to="/full-film">Подробнее...</v-btn>
-            </v-card-actions>
-              </v-card>
-            </v-col>
-          </v-row>
+          <ListFilms :films="films"/>
         </v-container>
       </template>
       </v-container>
@@ -69,15 +48,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import Counter from './components/Counter.vue';
+import ListFilms from './components/ListFilms.vue';
 import 'vue-material-design-icons/styles.css';
 import { mdiMovieOpen } from '@mdi/js';
+import { Component, Vue } from 'vue-property-decorator';
 
 export default Vue.extend({
   name: 'App',
   components: {
     Counter,
+    ListFilms
   },
   data: () => ({
     drawer: true,
@@ -102,14 +83,6 @@ export default Vue.extend({
 
 .app-name {
   cursor: pointer;
-}
-
-.crop {
-
-}
-
-.height {
-  height: 100%;
 }
 
 </style>
