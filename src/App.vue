@@ -63,6 +63,9 @@ export default Vue.extend({
     getMenu: function() {
       return this.$store.getters.getMenu;
     }
+  },
+  created: function() {
+    console.log(this.$store.getters.getFilm(2));
   }
 
 });

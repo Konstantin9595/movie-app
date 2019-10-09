@@ -15,7 +15,13 @@ export default new Vuex.Store({
       { id: 1, label: "Фильмы",  href: "/films" },
       { id: 2, label: "Сериалы", href: "/series" },
       { id: 3, label: "Мультфильмы", href: "/multfilms" }
-    ]
+    ],
+    fullFilms: [
+      {id: 1, filmId: 2, full_desc: "Полное описание фильма под идентификатором № 2", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 2, filmId: 3, full_desc: "Полное описание фильма под идентификатором № 3", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 3, filmId: 4, full_desc: "Полное описание фильма под идентификатором № 4", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 4, filmId: 1, full_desc: "Полное описание фильма под идентификатором № 1", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+    ],
   },
   mutations: {
 
@@ -29,6 +35,9 @@ export default new Vuex.Store({
     },
     getMenu: function({menu}:any):[] {
       return menu;
-    }
+    },
+    getFilm: function({films}:any):{} {
+      return (filmId:number) => films.filter((film:any) => film.id === filmId);
+    },
   },
 });
