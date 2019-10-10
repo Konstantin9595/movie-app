@@ -65,8 +65,11 @@ export default Vue.extend({
     },
     getMenu: function() {
       return this.$store.getters.getMenu;
-    }
+    },
   },
+  created() {
+    this.$store.dispatch('getPopularMoviesAction');
+  }
 });
 </script>
 

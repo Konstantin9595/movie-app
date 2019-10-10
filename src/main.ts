@@ -3,17 +3,17 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import axios from 'axios';
 
 Vue.config.productionTip = false;
+
 
 new Vue({
   router,
   store,
   vuetify,
   render: (h) => h(App),
-  mounted() {
-    console.log("LifeCycle Mounted");
+  created() {
+    console.log("Vue Root component created");
   }
 }).$mount('#app');
 
