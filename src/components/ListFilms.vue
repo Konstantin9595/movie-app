@@ -7,9 +7,10 @@
           <v-card-title>{{ film.title }}</v-card-title>
           <v-card-text class="crop">{{ film.desc }}</v-card-text>
           <v-card-actions>
-            <v-btn text to="/full-film">Подробнее...</v-btn>
+            <router-link :to="'/full-film/'+film.id" tag="span">
+              <v-btn text>Подробнее...</v-btn>
+            </router-link>
           </v-card-actions>
-          
         </v-card>
       </v-col>
     </v-row>
@@ -18,6 +19,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import FullFilm from './FullFilm.vue';
 
 export default {
     props: {

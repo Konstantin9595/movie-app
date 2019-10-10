@@ -26,7 +26,9 @@
       >
       <template>
         <v-container fluid>
-          <ListFilms :films="getFilms"/>
+          <router-view name="home" :films="getFilms"></router-view>
+          <router-view name="counter"></router-view>
+          <router-view name="full"></router-view>
         </v-container>
       </template>
       </v-container>
@@ -36,6 +38,7 @@
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
+            <!-- <ListFilms :films="getFilms"/> -->
 </template>
 
 <script lang="ts">
@@ -65,7 +68,7 @@ export default Vue.extend({
     }
   },
   created: function() {
-    console.log(this.$store.getters.getFilm(2));
+   // console.log(this.$store.getters.getFilm(2));
   }
 
 });
