@@ -2,8 +2,8 @@
   <div>
     <v-container>
       <v-card v-for="film in currentFilm" :key="film.filmId" class="mx-auto my-12" max-width="80%">
-        <v-img height="250" :src="film.video"></v-img>
-
+      <iframe class="mx-auto d-flex justify-content-center" width="420" height="315" :src="film.video">
+      </iframe>
         <v-card-title>{{ film.title }}</v-card-title>
         <v-card-text>
           <v-row align="center">

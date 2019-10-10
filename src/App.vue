@@ -15,7 +15,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <router-link to="/" tag="span" class="app-name">
-          Application
+          MovieApp
         </router-link>
       </v-toolbar-title>
     </v-app-bar>
@@ -67,8 +67,11 @@ export default Vue.extend({
       return this.$store.getters.getMenu;
     }
   },
+  mounted: function() {
+    console.log("LifeCycle Mounted");
+  },
   created: function() {
-   // console.log(this.$store.getters.getFilm(2));
+   console.log("LifeCycle Created");
   }
 
 });

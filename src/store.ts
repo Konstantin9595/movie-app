@@ -6,10 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     films: [
-      {id: 1, title: "Великий уравнитель", desc: "Описание фильма великий уравнитель", src: "https://picsum.photos/200/300"},
-      {id: 2, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", src: "https://picsum.photos/id/237/200/300"},
-      {id: 3, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", src: "https://picsum.photos/id/237/200/300"},
-      {id: 4, title: "Тест", desc: "Описание тестового фильма", src: "https://picsum.photos/id/237/200/300"},
+      {id: 1, title: "Великий уравнитель", desc: "Описание фильма великий уравнитель", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 2, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 3, title: "Великий уравнитель", desc: "Описание фильмы великий уравнитель", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
+      {id: 4, title: "Тест", desc: "Описание тестового фильма", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png"},
     ],
     menu: [
       { id: 1, label: "Фильмы",  href: "/films" },
@@ -17,10 +17,10 @@ export default new Vuex.Store({
       { id: 3, label: "Мультфильмы", href: "/multfilms" }
     ],
     fullFilms: [
-      {id: 1, filmId: 2, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 2", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
-      {id: 2, filmId: 3, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 3", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
-      {id: 3, filmId: 4, title: "Тест", fullDesc: "Полное описание фильма под идентификатором № 4", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
-      {id: 4, filmId: 1, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 1", video: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
+      {id: 1, filmId: 2, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 2", video: "https://www.youtube.com/embed/wWPfu-cOvMM", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
+      {id: 2, filmId: 3, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 3", video: "https://www.youtube.com/embed/wWPfu-cOvMM", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
+      {id: 3, filmId: 4, title: "Тест", fullDesc: "Полное описание фильма под идентификатором № 4", video: "https://www.youtube.com/embed/wWPfu-cOvMM", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
+      {id: 4, filmId: 1, title: "Великий уравнитель", fullDesc: "Полное описание фильма под идентификатором № 1", video: "https://www.youtube.com/embed/wWPfu-cOvMM", poster: "https://training.ti.com/sites/default/files/default_images/tmb-video.png", rate: 4.5, peopleCountRate: 433},
     ],
   },
   mutations: {
