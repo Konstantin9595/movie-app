@@ -67,13 +67,6 @@ export default Vue.extend({
       return this.$store.getters.getMenu;
     }
   },
-  mounted: function() {
-    console.log("LifeCycle Mounted");
-  },
-  created: function() {
-   console.log("LifeCycle Created");
-  }
-
 });
 </script>
 
