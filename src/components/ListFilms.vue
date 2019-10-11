@@ -9,7 +9,7 @@
           <v-card-text class="crop">{{ film.overview }}</v-card-text>
           <v-card-actions>
             <router-link :to="'/full-film/'+film.id" tag="span">
-              <v-btn text>Подробнее...</v-btn>
+              <v-btn text @click="getFullMovieInfoAction(film.id)">Подробнее...</v-btn>
             </router-link>
           </v-card-actions>
         </v-card>
@@ -34,7 +34,13 @@ export default {
         imagePrefix: "https://image.tmdb.org/t/p/w600_and_h900_bestv2",
         defaultImage: "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
       }
-    }
+    },
+    methods: {
+      getFullMovieInfoAction(id:any) {
+        const parsedId = parseInt(id);
+        this.$store.dispatch('getFullMovieInfoAction', parsedId);
+      }
+    },
 }
 
 </script> 

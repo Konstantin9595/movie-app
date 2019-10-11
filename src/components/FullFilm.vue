@@ -1,14 +1,15 @@
 <template>
   <div>
     <v-container>
-      <v-card v-for="film in currentFilm" :key="film.filmId" class="mx-auto my-12" max-width="80%">
-      <iframe class="mx-auto d-flex justify-content-center" width="420" height="315" :src="film.video">
-      </iframe>
-        <v-card-title>{{ film.title }}</v-card-title>
+      <input type="submit" value="GGG" id="" @click="g">
+      <v-card v-if="currentFilm" :key="currentFilm.id" class="mx-auto my-12" max-width="80%">
+      <iframe v-if="currentFilm.video" class="mx-auto d-flex justify-content-center" width="420" height="315" :src="currentFilm.video"></iframe>
+      <v-img else height="200px" :src="imagePrefix + currentFilm.backdrop_path" />
+        <v-card-title>{{ currentFilm.title }}</v-card-title>
         <v-card-text>
           <v-row align="center">
             <v-rating
-              :value="4.5"
+              :value="currentFilm.vote_average"
               color="amber"
               half-increments
               dense
@@ -16,14 +17,16 @@
               readonly
               class="ml-2"
             ></v-rating>
-            <div class="grey--text ml-4">{{film.rate}} ({{film.peopleCountRate}})</div>
+            <div class="grey--text ml-4">{{currentFilm.vote_average}} ({{currentFilm.vote_count}})</div>
           </v-row>
 
           <v-divider class="mt-3 mb-3"></v-divider>
 
-          <div>{{film.fullDesc}}</div>
+          <div>{{currentFilm.overview}}</div>
+          
         </v-card-text>
       </v-card>
+      <v-card else>Не удалось загрузить информацию. Попробуйте позже!</v-card>
     </v-container>
   </div>
 </template>
@@ -32,12 +35,19 @@
 export default {
   data() {
     return {
-      currentFilm: null
+      currentFilm: null,
+      imagePrefix: "https://image.tmdb.org/t/p/w600_and_h900_bestv2",
+      defaultImage: "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
     };
   },
-  created() {
-    const currentFilmId = parseInt(this.$route.params.id);
-    this.currentFilm = this.$store.getters.getFilm(currentFilmId);
+  methods: {
+    g() {
+        const currentFilmId = parseInt(this.$route.params.id);
+        console.log("ROUTE PARAMSE = ", currentFilmId);
+        this.currentFilm = this.$store.getters.getFilmById(currentFilmId);
+    }
+    // const currentFilmId = parseInt(this.$route.params.id);
+    // this.currentFilm = this.$store.getters.getFilm(currentFilmId);
   }
 };
 </script>
