@@ -13,15 +13,15 @@ export default new Vuex.Store({
       { id: 2, label: "Сериалы", href: "/series" },
     ],
     filmById: [],
-    requestApiSuccess: false,
-    errorMessage: "Не удалось загрузить контент. Обновите страницу или попробуйте немного позже"
+    apiResponse: {status: null, message: null},
   },
   mutations: {
     requestRemoteApi(state, payload) {
-      console.log("requestRemoteApi");
+
     },
-    errorRequestRemoteApi(state, payload) {
-      console.log("errorRequestRemoteApi");
+    errorRequestRemoteApi({apiResponse}, {status, message}) {
+      apiResponse.status = status;
+      apiResponse.message = message;
     },
     successRequestRemoteApi(state, payload) {
       const newFilmArray:any = [...state.films, ...payload.films];
@@ -34,7 +34,7 @@ export default new Vuex.Store({
       // commit('requestRemoteApi');
       api.miscPopularMovies({page}, (err:any, res:any) => {
         if (err) {
-          // commit('errorRequestRemoteApi');
+          commit('errorRequestRemoteApi', {status: err.status, message: err.message});
           throw new Error(err);
         }
 
