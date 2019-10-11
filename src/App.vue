@@ -32,6 +32,7 @@
         </v-container>
       </template>
       </v-container>
+      <input type="submit" value="more..." @click="moreContent(page)">
     </v-content>
 
     <v-footer app>
@@ -58,6 +59,7 @@ export default Vue.extend({
   },
   data: () => ({
     drawer: true,
+    page: 1,
   }),
   computed: {
     getFilms: function() {
@@ -67,9 +69,15 @@ export default Vue.extend({
       return this.$store.getters.getMenu;
     },
   },
-  created() {
-    this.$store.dispatch('getPopularMoviesAction');
-  }
+  mounted() {
+    this.$store.dispatch('getPopularMoviesAction', this.page);
+  },
+  methods: {
+    moreContent() {
+      this.page++;
+      this.$store.dispatch('getPopularMoviesAction', this.page);
+    }
+  },
 });
 </script>
 
