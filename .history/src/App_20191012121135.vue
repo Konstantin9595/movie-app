@@ -33,7 +33,7 @@
       </template>
       </v-container>
       <div class="my-2">
-        <v-btn :loading="!isLoaded" block small color="primary" @click="moreContent(page)">Загрузить еще...</v-btn>
+        <v-btn :loading="false" small color="primary" @click="moreContent(page)">Primary</v-btn>
       </div>
       <!-- <input type="submit" value="more..." > -->
     </v-content>
