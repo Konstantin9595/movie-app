@@ -82,6 +82,19 @@ export default new Vuex.Store({
         
       });
     },
+    getFullTvInfoAction({commit}:any, id:number) {
+      return new Promise((resolve, reject) => {
+        commit('requestRemoteApi');
+        api.tvInfo({id}, (err:any, res:any) => {
+          if (err) {
+            commit('errorRequestRemoteApi', {status: err.status, message: err.message});
+            reject(err);
+          }
+          resolve(res);
+      })
+      
+    });
+    },
     getPopularTvAction({commit}:any, page = 1 ) {
       return new Promise((resolve, reject) => {
         commit('requestRemoteApi');

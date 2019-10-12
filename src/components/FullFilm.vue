@@ -50,7 +50,7 @@ export default {
     };
   },
   methods: {
-     getFilms() {
+     getFilmInfo() {
       this.$store.dispatch("getFullMovieInfoAction", this.routeId)
       .then(res => {
           this.currentFilm = res;
@@ -60,19 +60,36 @@ export default {
         this.isLoaded = false;
         throw new Error(err);
       });
-
-      this.$store.dispatch("getFilmTrailersAction", this.routeId)
+    },
+    getTvInfo() {
+      this.$store.dispatch("getFullTvInfoAction", this.routeId)
       .then(res => {
-        const {source} = res;
-        this.trailer = `${this.prefix}${source}`;
+          this.currentFilm = res;
+          this.isLoaded = !this.isLoaded;
       })
       .catch(err => {
+        this.isLoaded = false;
         throw new Error(err);
       });
     },
+    matchCategory(category:string) {
+      switch (category) {
+        case 'tv':
+          this.getTvInfo();
+          break;
+        case 'films':
+          this.getFilmInfo();
+          break;
+        default:
+          this.getFilmInfo();
+          break;
+      }
+    }
   },
+
   created () {
-    this.getFilms();
+    const {category} = this.$route.params;
+    this.matchCategory(category);
   },
 
   computed: mapState(['fullFilmIsLoaded']),

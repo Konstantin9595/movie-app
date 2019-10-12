@@ -8,7 +8,7 @@
           <v-card-title>{{ film.title }}</v-card-title>
           <v-card-text class="crop">{{ film.overview }}</v-card-text>
           <v-card-actions>
-            <router-link :to="'/full-film/'+film.id" tag="span">
+            <router-link :to="'/full-'+category+'/'+film.id" tag="span">
               <v-btn text>Подробнее...</v-btn>
             </router-link>
           </v-card-actions>
@@ -18,6 +18,15 @@
     <v-row v-else>
       <v-col>Идет загрузка...</v-col>
     </v-row>
+      <div class="my-2">
+        <v-btn
+          :loading="!isLoaded"
+          block
+          small
+          color="primary"
+          @click="moreContent()"
+        >Загрузить еще...</v-btn>
+      </div>
   </div>
 </template>
 
@@ -30,6 +39,8 @@ export default {
     props: {
       isLoaded: Boolean,
       films: Array,
+      category: String,
+      moreContent: Function,
     },
     data() {
       return {
@@ -37,13 +48,7 @@ export default {
         defaultImage: "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png",
       }
     },
-    mounted() {
-      
-    },
-    methods: {
-    },  
 }
-// ListFilm принимает props фильмы и лоадеры. значит whatcher должен прослушиваться в компоненте App
 </script> 
 
 <style scoped>

@@ -15,13 +15,13 @@
       <v-container fluid>
         <template>
           <v-container fluid>
-            <router-view name="films" :films="films" :isLoaded="isLoaded"></router-view>
+            <router-view name="films" :films="films" :isLoaded="isLoaded" :category="category" :moreContent="moreContent"></router-view>
             <router-view name="counter"></router-view>
             <router-view name="full"></router-view>
           </v-container>
         </template>
       </v-container>
-      <div class="my-2">
+      <!-- <div class="my-2">
         <v-btn
           :loading="!isLoaded"
           block
@@ -29,7 +29,7 @@
           color="primary"
           @click="moreContent(page)"
         >Загрузить еще...</v-btn>
-      </div>
+      </div> -->
     </v-content>
 
     <v-footer app>
@@ -57,6 +57,7 @@ export default Vue.extend({
     page: 1,
     isLoaded: false,
     films: null,
+    category: "film"
   }),
   computed: {
     getMenu() {
@@ -91,9 +92,11 @@ export default Vue.extend({
     routeMatching(path:string) {
       switch (path) {
         case '/films':
+          this.category = "films";
           this.getFilms();
           break;
         case '/tv':
+          this.category = "tv";
           this.getTv();
           break;
         default:
