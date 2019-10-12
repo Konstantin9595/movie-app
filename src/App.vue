@@ -21,15 +21,6 @@
           </v-container>
         </template>
       </v-container>
-      <!-- <div class="my-2">
-        <v-btn
-          :loading="!isLoaded"
-          block
-          small
-          color="primary"
-          @click="moreContent(page)"
-        >Загрузить еще...</v-btn>
-      </div> -->
     </v-content>
 
     <v-footer app>
@@ -57,7 +48,8 @@ export default Vue.extend({
     page: 1,
     isLoaded: false,
     films: null,
-    category: "film"
+    category: "film",
+    currentPath: "/"
   }),
   computed: {
     getMenu() {
@@ -72,10 +64,9 @@ export default Vue.extend({
     moreContent() {
       this.isLoaded = !this.isLoaded;
       this.page++;
-      this.$store.dispatch("getPopularMoviesAction", this.page).then(res => {
-        this.films = res.results;
-        this.isLoaded = !this.isLoaded;
-      });
+      const {category} = this.$route.params;
+      this.routeMatching(category);
+
     },
     getFilms() {
       this.$store.dispatch("getPopularMoviesAction", this.page).then(res => {
@@ -90,13 +81,14 @@ export default Vue.extend({
       }).catch(err => console.log(err))
     },
     routeMatching(path:string) {
-      switch (path) {
-        case '/films':
-          this.category = "films";
+      const currentPath = path ? path.replace('/', '') : null;
+      switch (currentPath) {
+        case 'films':
+          this.category = currentPath;
           this.getFilms();
           break;
-        case '/tv':
-          this.category = "tv";
+        case 'tv':
+          this.category = currentPath;
           this.getTv();
           break;
         default:
@@ -108,6 +100,7 @@ export default Vue.extend({
   watch: {
     $route(to, from) {
       this.isLoaded = !this.isLoaded;
+      this.currentPath = to.path;
       this.routeMatching(to.path);
     }
   },

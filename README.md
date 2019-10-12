@@ -1,29 +1,23 @@
-# vue-project
+# MovieApp
 
-## Project setup
-```
-yarn install
-```
+## Посмотреть демо:
+-  codesanbox url
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### Как это выглядит:
+![](movie-app.gif)
 
-### Compiles and minifies for production
+### Использование
 ```
-yarn run build
-```
+1. Перед развертыванием, необходимо зарегистрироватьcя и получить бесплатный ключь для доступа к api. На сайте https://www.themoviedb.org/login в личном кабинете.
 
-### Run your tests
-```
-yarn run test
-```
+2. git clone https://github.com/Konstantin9595/movie-app
 
-### Lints and fixes files
-```
-yarn run lint
-```
+3. cd movie-app/
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+4. Создайте .env.local файл и запишите перемунную VUE_APP_API_KEY="Ваш api ключь полученный на сайте(ссылка на шаге 1)" 
+
+5. yarn serve
+
+6. Откройте браузер по адрессу http://localhost:8081/
+
+```
