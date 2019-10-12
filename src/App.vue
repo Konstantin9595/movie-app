@@ -35,7 +35,6 @@
       <div class="my-2">
         <v-btn :loading="!isLoaded" block small color="primary" @click="moreContent(page)">Загрузить еще...</v-btn>
       </div>
-      <!-- <input type="submit" value="more..." > -->
     </v-content>
 
     <v-footer app>

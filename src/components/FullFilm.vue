@@ -3,13 +3,13 @@
     <v-container>
       <v-card v-if="isLoaded" :key="currentFilm.id" class="mx-auto my-12" max-width="80%">
         <iframe
-          v-if="currentFilm.video"
+          v-if="trailer"
           class="mx-auto d-flex justify-content-center"
           width="420"
           height="315"
-          :src="currentFilm.video"
+          :src="trailer"
         ></iframe>
-        <v-img else height="200px" :src="imagePrefix + currentFilm.backdrop_path" />
+        <v-img v-else height="200px" :src="imagePrefix + currentFilm.backdrop_path" />
         <v-card-title>{{ currentFilm.title }}</v-card-title>
         <v-card-text>
           <v-row align="center">
@@ -38,6 +38,8 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
+      trailer: "",
+      prefix: "https://www.youtube.com/embed/",
       isLoaded: false,
       currentFilm: {},
       routeId: parseInt(this.$route.params.id),
@@ -61,6 +63,17 @@ export default {
       this.isLoaded = false;
       throw new Error(err);
     });
+
+    this.$store.dispatch("getFilmTrailersAction", this.routeId)
+    .then(res => {
+      const {source} = res;
+      this.trailer = `${this.prefix}${source}`;
+      console.log("trailer = ", this.trailer)
+    })
+    .catch(err => {
+      throw new Error(err);
+    });
+
   },
 
   computed: mapState(['fullFilmIsLoaded']),

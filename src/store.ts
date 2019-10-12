@@ -19,6 +19,8 @@ export default new Vuex.Store({
       fullInfo: null,
       isLoaded: false
     },
+    trailrFilmById: {},
+    tvFilmById: {},
     apiResponse: {status: null, message: null},
   },
   mutations: {
@@ -43,7 +45,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getPopularMoviesAction({state, commit}:any, page = 1) {
+    getPopularMoviesAction({commit}:any, page = 1) {
       return new Promise((resolve, reject) => {
         commit('requestRemoteApi');
         api.miscPopularMovies({page}, (err:any, res:any) => {
@@ -60,7 +62,7 @@ export default new Vuex.Store({
         });
       })
     },
-    getFullMovieInfoAction({state, commit}:any, id:number)  {
+    getFullMovieInfoAction({commit}:any, id:number)  {
         return new Promise((resolve, reject) => {
           commit('requestRemoteApi');
           api.movieInfo({id}, (err:any, res:any) => {
@@ -79,8 +81,25 @@ export default new Vuex.Store({
         })
         
       });
-    }
-  },
+    },
+    getFilmTrailersAction({commit}, id:number) {
+      return new Promise((resolve, reject) => {
+        commit('requestRemoteApi');
+        api.movieTrailers({id}, (err:any, res:any) => {
+          if (err) {
+            commit('errorRequestRemoteApi', {status: err.status, message: err.message});
+            reject(err);
+          }
+          resolve(res.youtube[0]);
+        });
+      });
+    },
+    getTvTrailersAction({commit}, id:number) {
+      return new Promise((resolve, reject) => {
+        //api.movieTrailers({id}, )
+      });
+  }
+},
   getters: {
     getFilms: function({films}:any):[] {
       return films;
