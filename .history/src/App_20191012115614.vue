@@ -77,14 +77,12 @@ export default Vue.extend({
     });
   },
   methods: {
-    moreContent() {
-      this.isLoaded = false;
-      this.page++;
-      this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
-        this.films = res.results;
-        this.isLoaded = !this.isLoaded;
-      });
-    },
+    // moreContent() {
+    //   this.page++;
+    //   this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
+    //     this.films = res.results;
+    //   });
+    // },
   },
 });
 </script>

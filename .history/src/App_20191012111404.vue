@@ -26,7 +26,7 @@
       >
       <template>
         <v-container fluid>
-          <router-view name="home"  :films="films" :isLoaded="isLoaded"></router-view>
+          <router-view name="home" :films="getFilms"></router-view>
           <router-view name="counter"></router-view>
           <router-view name="full"></router-view>
         </v-container>
@@ -60,30 +60,22 @@ export default Vue.extend({
     drawer: true,
     page: 1,
     isLoaded: false,
-    films: null,
   }),
   computed: {
-    // getFilms: function() {
-    //   return this.$store.getters.getFilms;
-    // },
+    getFilms: function() {
+      return this.$store.getters.getFilms;
+    },
     getMenu: function() {
       return this.$store.getters.getMenu;
     },
   },
   created() {
-    this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
-      this.films = res.results;
-      this.isLoaded = !this.isLoaded;
-    });
+    this.$store.dispatch('getPopularMoviesAction', this.page);
   },
   methods: {
     moreContent() {
-      this.isLoaded = false;
       this.page++;
-      this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
-        this.films = res.results;
-        this.isLoaded = !this.isLoaded;
-      });
+      this.$store.dispatch('getPopularMoviesAction', this.page);
     },
   },
 });

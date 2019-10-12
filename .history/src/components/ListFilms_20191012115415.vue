@@ -38,7 +38,11 @@ export default {
       }
     },
     mounted() {
-      
+      console.log("MOUNTED", this.films)
+      // this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
+      //   this.ListFilms = res.results;
+      //   this.isLoaded = !this.isLoaded;
+      // });
     },
     methods: {
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row v-if="isLoaded">
-      <v-col  v-for="film in films" :key="film.id" xs="12" sm="6" md="4">
+      <v-col  v-for="film in ListFilms" :key="film.id" xs="12" sm="6" md="4">
         <v-card class="pa-2" outlined tile >
           <v-img v-if="film.backdrop_path" height="200px" :src="imagePrefix + film.backdrop_path" />
           <v-img v-else height="200px" :src="defaultImage" />
@@ -29,7 +29,7 @@ import FullFilm from './FullFilm.vue';
 export default {
     props: {
       isLoaded: Boolean,
-      films: Array,
+      ListFilms: Array,
     },
     data() {
       return {
@@ -38,7 +38,10 @@ export default {
       }
     },
     mounted() {
-      
+      // this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
+      //   this.ListFilms = res.results;
+      //   this.isLoaded = !this.isLoaded;
+      // });
     },
     methods: {
     }

@@ -26,7 +26,7 @@
       >
       <template>
         <v-container fluid>
-          <router-view name="home"  :films="films" :isLoaded="isLoaded"></router-view>
+          <router-view name="home" :films="getFilms"></router-view>
           <router-view name="counter"></router-view>
           <router-view name="full"></router-view>
         </v-container>
@@ -59,8 +59,6 @@ export default Vue.extend({
   data: () => ({
     drawer: true,
     page: 1,
-    isLoaded: false,
-    films: null,
   }),
   computed: {
     // getFilms: function() {
@@ -71,19 +69,12 @@ export default Vue.extend({
     },
   },
   created() {
-    this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
-      this.films = res.results;
-      this.isLoaded = !this.isLoaded;
-    });
+    this.$store.dispatch('getPopularMoviesAction', this.page).then(res => console.log("APP getPopularMoviesAction", res));
   },
   methods: {
     moreContent() {
-      this.isLoaded = false;
       this.page++;
-      this.$store.dispatch('getPopularMoviesAction', this.page).then(res => {
-        this.films = res.results;
-        this.isLoaded = !this.isLoaded;
-      });
+      this.$store.dispatch('getPopularMoviesAction', this.page).then(res => console.log("APP More getPopularMoviesAction", res));
     },
   },
 });

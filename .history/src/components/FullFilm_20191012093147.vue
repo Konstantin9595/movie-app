@@ -59,6 +59,7 @@ export default {
     })
     .catch(err => {
       this.isLoaded = false;
+      console.log("Err = ", err);
     });
   },
 

@@ -49,7 +49,7 @@ export default new Vuex.Store({
         api.miscPopularMovies({page}, (err:any, res:any) => {
           if (err) {
             commit('successRequestPopularMovie', {status: err.status, message: err.message});
-            reject(err);
+            throw new Error(err);
           }
           commit('successRequestPopularMovie', {
             films: res.results,

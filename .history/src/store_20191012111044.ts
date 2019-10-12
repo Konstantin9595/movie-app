@@ -44,21 +44,17 @@ export default new Vuex.Store({
   },
   actions: {
     getPopularMoviesAction({state, commit}:any, page = 1) {
-      return new Promise((resolve, reject) => {
-        commit('requestRemoteApi');
-        api.miscPopularMovies({page}, (err:any, res:any) => {
-          if (err) {
-            commit('successRequestPopularMovie', {status: err.status, message: err.message});
-            reject(err);
-          }
-          commit('successRequestPopularMovie', {
-            films: res.results,
-            page,
-          });
-
-          resolve(res);
+      commit('requestRemoteApi');
+      api.miscPopularMovies({page}, (err:any, res:any) => {
+        if (err) {
+          commit('successRequestPopularMovie', {status: err.status, message: err.message});
+          throw new Error(err);
+        }
+        commit('successRequestPopularMovie', {
+          films: res.results,
+          page,
         });
-      })
+      });
     },
     getFullMovieInfoAction({state, commit}:any, id:number)  {
         return new Promise((resolve, reject) => {
@@ -75,7 +71,7 @@ export default new Vuex.Store({
               isLoaded: true,
             });
 
-            resolve(res);
+            resolve(res)
         })
         
       });
