@@ -1,13 +1,13 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <ListMenu :listMenu="getMenu" />
+  <v-app id='inspire'>
+    <v-navigation-drawer v-model='drawer' app clipped>
+      <ListMenu :listMenu='getMenu' />
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop='drawer = !drawer'></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" class="app-name">MovieApp</router-link>
+        <router-link to='/' tag='span' class='app-name'>MovieApp</router-link>
       </v-toolbar-title>
     </v-app-bar>
 
@@ -15,9 +15,9 @@
       <v-container fluid>
         <template>
           <v-container fluid>
-            <router-view name="films" :films="films" :isLoaded="isLoaded" :category="category" :moreContent="moreContent"></router-view>
-            <router-view name="counter"></router-view>
-            <router-view name="full"></router-view>
+            <router-view name='films' :films='films' :isLoaded='isLoaded' :category='category' :moreContent='moreContent'></router-view>
+            <router-view name='counter'></router-view>
+            <router-view name='full'></router-view>
           </v-container>
         </template>
       </v-container>
@@ -29,27 +29,27 @@
   </v-app>
 </template>
 
-<script lang="ts">
-import Counter from "./components/Counter.vue";
-import ListFilms from "./components/ListFilms.vue";
-import ListMenu from "./components/ListMenu.vue";
-import "vue-material-design-icons/styles.css";
-import { Component, Vue } from "vue-property-decorator";
+<script lang='ts'>
+import Counter from './components/Counter.vue';
+import ListFilms from './components/ListFilms.vue';
+import ListMenu from './components/ListMenu.vue';
+import 'vue-material-design-icons/styles.css';
+import { Component, Vue } from 'vue-property-decorator';
 
 export default Vue.extend({
-  name: "App",
+  name: 'App',
   components: {
     Counter,
     ListFilms,
-    ListMenu
+    ListMenu,
   },
   data: () => ({
     drawer: true,
     page: 1,
     isLoaded: false,
     films: null,
-    category: "film",
-    currentPath: "/"
+    category: 'film',
+    currentPath: '/',
   }),
   computed: {
     getMenu() {
@@ -57,7 +57,7 @@ export default Vue.extend({
     },
   },
   created() {
-    const {category} = this.$route.params;
+    const {category}: any = this.$route.params;
     this.routeMatching(category);
   },
   methods: {
@@ -69,19 +69,20 @@ export default Vue.extend({
 
     },
     getFilms() {
-      this.$store.dispatch("getPopularMoviesAction", this.page).then(res => {
+      this.$store.dispatch('getPopularMoviesAction', this.page).then((res) => {
         this.films = res.results;
         this.isLoaded = !this.isLoaded;
-      }).catch(err => console.log(err))
+      }).catch((err) => console.log(err));
     },
+
     getTv() {
-      this.$store.dispatch("getPopularTvAction", this.page).then(res => {
+      this.$store.dispatch('getPopularTvAction', this.page).then((res) => {
         this.films = res.results;
         this.isLoaded = !this.isLoaded;
-      }).catch(err => console.log(err))
+      }).catch((err) => console.log(err));
     },
-    routeMatching(path:string) {
-      const currentPath = path ? path.replace('/', '') : null;
+    routeMatching(path: string) {
+      const currentPath = (typeof path === 'string' && path !== '/' ? path.replace('/', '') : '');
       switch (currentPath) {
         case 'films':
           this.category = currentPath;
@@ -92,6 +93,7 @@ export default Vue.extend({
           this.getTv();
           break;
         default:
+          this.category = 'films';
           this.getFilms();
           break;
       }
@@ -100,9 +102,8 @@ export default Vue.extend({
   watch: {
     $route(to, from) {
       this.isLoaded = !this.isLoaded;
-      this.currentPath = to.path;
       this.routeMatching(to.path);
-    }
+    },
   },
 });
 </script>

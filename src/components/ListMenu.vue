@@ -21,15 +21,15 @@ import { mdiMovieOpen } from '@mdi/js';
 // Не работает навигация
 export default {
     props: {
-        listMenu: Array
+        listMenu: Array,
     },
 
-    data: function() {
+    data() {
       return {
         mdiMovieOpen,
-      }
+      };
     },
-}
+};
 
 </script> 
 

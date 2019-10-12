@@ -12,9 +12,4 @@ new Vue({
   store,
   vuetify,
   render: (h) => h(App),
-  created() {
-    console.log("Vue Root component created");
-  }
 }).$mount('#app');
-
-  
