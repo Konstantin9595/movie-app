@@ -12,7 +12,7 @@ export default new Vuex.Store({
     films: [],
     menu: [
       { id: 1, label: "Фильмы",  href: "/films" },
-      { id: 2, label: "Сериалы", href: "/series" },
+      { id: 2, label: "Сериалы", href: "/tv" },
     ],
     fullFilmInfoById: {
       id: null,
@@ -50,7 +50,7 @@ export default new Vuex.Store({
         commit('requestRemoteApi');
         api.miscPopularMovies({page}, (err:any, res:any) => {
           if (err) {
-            commit('successRequestPopularMovie', {status: err.status, message: err.message});
+            commit('errorRequestRemoteApi', {status: err.status, message: err.message});
             reject(err);
           }
           commit('successRequestPopularMovie', {
@@ -82,6 +82,18 @@ export default new Vuex.Store({
         
       });
     },
+    getPopularTvAction({commit}:any, page = 1 ) {
+      return new Promise((resolve, reject) => {
+        commit('requestRemoteApi');
+        api.miscPopularTvs({page}, (err:any, res:any) => {
+          if (err) {
+            commit('errorRequestRemoteApi', {status: err.status, message: err.message});
+            reject(err);
+          }
+          resolve(res);
+        })
+      });
+    },
     getFilmTrailersAction({commit}, id:number) {
       return new Promise((resolve, reject) => {
         commit('requestRemoteApi');
@@ -94,11 +106,11 @@ export default new Vuex.Store({
         });
       });
     },
-    getTvTrailersAction({commit}, id:number) {
-      return new Promise((resolve, reject) => {
-        //api.movieTrailers({id}, )
-      });
-  }
+  //   getTvTrailersAction({commit}, id:number) {
+  //     return new Promise((resolve, reject) => {
+  //      api.movieTrailers({id}, )
+  //     });
+  // }
 },
   getters: {
     getFilms: function({films}:any):[] {

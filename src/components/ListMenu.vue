@@ -6,7 +6,9 @@
             <v-icon> {{ mdiMovieOpen }} </v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-btn text small :href="item.href">{{ item.label }}</v-btn>
+            <router-link :to="item.href" tag="span">
+              <v-btn text small>{{ item.label }}</v-btn>
+            </router-link>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -16,7 +18,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { mdiMovieOpen } from '@mdi/js';
-
+// Не работает навигация
 export default {
     props: {
         listMenu: Array
@@ -24,9 +26,9 @@ export default {
 
     data: function() {
       return {
-        mdiMovieOpen
+        mdiMovieOpen,
       }
-    }
+    },
 }
 
 </script> 

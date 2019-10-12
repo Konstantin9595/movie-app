@@ -1,6 +1,8 @@
 <template>
   <div class="counter">
     <h1>Counter: {{ counter }}</h1>
+    <h3>Category = {{$route.params.category}}</h3>
+    <h3>ID = {{$route.params.id}}</h3>
     <input type="submit" value="add" @click="counter++">
     <input type="submit" value="sub" @click="counter--">
     {{name}}

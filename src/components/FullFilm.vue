@@ -28,7 +28,7 @@
           <div>{{currentFilm.overview}}</div>
         </v-card-text>
       </v-card>
-      <v-card v-else>Не удалось загрузить информацию. Попробуйте позже!</v-card>
+      <v-card v-else>Идет загрузка...</v-card>
     </v-container>
   </div>
 </template>
@@ -42,6 +42,7 @@ export default {
       prefix: "https://www.youtube.com/embed/",
       isLoaded: false,
       currentFilm: {},
+      routeCategory: this.$route.params.category,
       routeId: parseInt(this.$route.params.id),
       imagePrefix: "https://image.tmdb.org/t/p/w600_and_h900_bestv2",
       defaultImage:
@@ -49,31 +50,29 @@ export default {
     };
   },
   methods: {
-     getFullMovieInfoAction() {
-      this.$store.dispatch("getFullMovieInfoAction", this.routeId);
+     getFilms() {
+      this.$store.dispatch("getFullMovieInfoAction", this.routeId)
+      .then(res => {
+          this.currentFilm = res;
+          this.isLoaded = !this.isLoaded;
+      })
+      .catch(err => {
+        this.isLoaded = false;
+        throw new Error(err);
+      });
+
+      this.$store.dispatch("getFilmTrailersAction", this.routeId)
+      .then(res => {
+        const {source} = res;
+        this.trailer = `${this.prefix}${source}`;
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
     },
   },
   created () {
-    this.$store.dispatch("getFullMovieInfoAction", this.routeId)
-    .then(res => {
-        this.currentFilm = res;
-        this.isLoaded = !this.isLoaded;
-    })
-    .catch(err => {
-      this.isLoaded = false;
-      throw new Error(err);
-    });
-
-    this.$store.dispatch("getFilmTrailersAction", this.routeId)
-    .then(res => {
-      const {source} = res;
-      this.trailer = `${this.prefix}${source}`;
-      console.log("trailer = ", this.trailer)
-    })
-    .catch(err => {
-      throw new Error(err);
-    });
-
+    this.getFilms();
   },
 
   computed: mapState(['fullFilmIsLoaded']),

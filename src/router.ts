@@ -11,25 +11,18 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'List films',
-      components: {
-        home: ListFilms,
-      }
-    },
-    {
-      path: '/full-film/:id',
+      path: '/full-:category/:id',
       name: 'full-film',
       components: {
         full: FullFilm,
       }
     },
     {
-      path: '/test',
-      name: 'test',
+      path: '/:category?',
+      name: 'List Film',
       components: {
-        counter: Counter,
-      }
+        films: ListFilms
+      },
     }
   ],
 });

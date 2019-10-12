@@ -16,7 +16,7 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col>Не удалось получить данные. Перезагрузите страницу или попробуйте позже!</v-col>
+      <v-col>Идет загрузка...</v-col>
     </v-row>
   </div>
 </template>
@@ -41,11 +41,12 @@ export default {
       
     },
     methods: {
-    }
+    },  
 }
-
+// ListFilm принимает props фильмы и лоадеры. значит whatcher должен прослушиваться в компоненте App
 </script> 
 
 <style scoped>
 
 </style>
+
