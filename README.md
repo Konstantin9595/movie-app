@@ -1,8 +1,5 @@
 # MovieApp
 
-## Посмотреть демо:
--  codesanbox url
-
 ### Как это выглядит:
 ![](movie-app.gif)
 
