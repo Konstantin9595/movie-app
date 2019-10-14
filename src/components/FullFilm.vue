@@ -43,7 +43,7 @@ export default {
       isLoaded: false,
       currentFilm: {},
       routeCategory: this.$route.params.category,
-      routeId: parseInt(this.$route.params.id),
+      routeId: parseInt(this.$route.params.id, 10),
       imagePrefix: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2',
       defaultImage:
         'http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png',
@@ -60,7 +60,7 @@ export default {
         this.isLoaded = false;
         throw new Error(err);
       });
-      this.$store.dispatch("getFilmTrailersAction", this.routeId)
+      this.$store.dispatch('getFilmTrailersAction', this.routeId)
       .then((res: any) => this.trailer = res.source)
       .catch((err) => {
         throw new Error(err);

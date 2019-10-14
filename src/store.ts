@@ -109,14 +109,8 @@ export default new Vuex.Store({
     },
 },
   getters: {
-    getFilms({films}: any): [] {
-      return films;
-    },
     getMenu({menu}: any): [] {
       return menu;
-    },
-    getFilmById({fullFilmInfoById}: any): {} {
-      return (filmId: number) => fullFilmInfoById.id === filmId ? fullFilmInfoById : {id: 0};
     },
   },
 });
