@@ -34,13 +34,18 @@
 </template>
 
 <script lang='ts'>
-import { mapState } from "vuex";
-import Vue from "vue";
-import Component from "vue-class-component";
+import { mapState } from 'vuex';
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
 @Component({})
 export default class FullFilm extends Vue {
-  data() {
+  private isLoaded = false;
+  private currentFilm = {};
+  private routeId = 0;
+  private trailer = '';
+
+  private data() {
     return {
       trailer: '',
       videoPrefix: 'https://www.youtube.com/embed/',
@@ -51,45 +56,45 @@ export default class FullFilm extends Vue {
       imagePrefix: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2',
       defaultImage:
         'http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png',
-    }
+    };
   }
 
-  getFilmInfo() {
+  private getFilmInfo() {
     this.$store
-      .dispatch("getFullMovieInfoAction", this.routeId)
+      .dispatch('getFullMovieInfoAction', this.routeId)
       .then((res: any) => {
         this.currentFilm = res;
         this.isLoaded = !this.isLoaded;
       })
-      .catch((err: any) => {
+      .catch((err: string) => {
         this.isLoaded = false;
         throw new Error(err);
       });
     this.$store
-      .dispatch("getFilmTrailersAction", this.routeId)
+      .dispatch('getFilmTrailersAction', this.routeId)
       .then((res: any) => (this.trailer = res.source))
-      .catch(err => {
+      .catch((err: string) => {
         throw new Error(err);
       });
   }
-  getTvInfo() {
+  private getTvInfo() {
     this.$store
-      .dispatch("getFullTvInfoAction", this.routeId)
+      .dispatch('getFullTvInfoAction', this.routeId)
       .then((res: any) => {
         this.currentFilm = res;
         this.isLoaded = !this.isLoaded;
       })
-      .catch((err: any) => {
+      .catch((err: string) => {
         this.isLoaded = false;
         throw new Error(err);
       });
   }
-  matchCategory(category: any) {
+  private matchCategory(category: string) {
     switch (category) {
-      case "tv":
+      case 'tv':
         this.getTvInfo();
         break;
-      case "films":
+      case 'films':
         this.getFilmInfo();
         break;
       default:
@@ -98,7 +103,7 @@ export default class FullFilm extends Vue {
     }
   }
 
-  created() {
+  private created() {
     const {category}: any = this.$route.params;
     this.matchCategory(category);
   }
