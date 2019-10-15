@@ -1,0 +1,10 @@
+{
+    "name": "movie-app-postfix",
+    "version": "1.0.0",
+    "description": "Heroku App",
+    "author": "Konstantin.Saigushev",
+    "private": true,
+    "scripts": {
+      "postinstall": "npm install express"
+    }
+  }
