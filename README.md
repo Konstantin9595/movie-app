@@ -1,5 +1,8 @@
 # MovieApp
 
+## Посмотреть демо:
+- https://movie-app-postfix.herokuapp.com/
+
 ### Как это выглядит:
 ![](movie-app.gif)
 
