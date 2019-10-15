@@ -11,8 +11,8 @@ export default new Vuex.Store({
     page: 0,
     films: [],
     menu: [
-      { id: 1, label: 'Фильмы',  href: '/films' },
-      { id: 2, label: 'Сериалы', href: '/tv' },
+      { id: 1, label: 'Movie',  href: '/films' },
+      { id: 2, label: 'TV', href: '/tv' },
     ],
     fullFilmInfoById: {
       id: null,

@@ -9,14 +9,14 @@
           <v-card-text class='crop'>{{ film.overview }}</v-card-text>
           <v-card-actions>
             <router-link :to="'/full-'+category+'/'+film.id" tag='span'>
-              <v-btn text>Подробнее...</v-btn>
+              <v-btn text>More details...</v-btn>
             </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col>Идет загрузка...</v-col>
+      <v-col>Loading...</v-col>
     </v-row>
       <div class='my-2'>
         <v-btn
@@ -25,7 +25,7 @@
           small
           color='primary'
           @click='moreContent()'
-        >Загрузить еще...</v-btn>
+        >More...</v-btn>
       </div>
   </div>
 </template>
